@@ -24,7 +24,7 @@ namespace MoqTest
 			}
 		}
 
-		private Run():this(DependencyFactory.Resolve<PingClass>())
+		private Run():this(DependencyFactory.Resolve<IPingAble>())
 		{
  
 		}

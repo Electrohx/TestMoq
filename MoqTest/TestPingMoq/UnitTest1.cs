@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MoqTest;
@@ -13,38 +14,19 @@ namespace TestPingMoq
 		[TestMethod]
 		public void TestMethod1()
 		{
-			IUnityContainer container = new UnityContainer();
+            var testList = new List<String> {"test1", "test2"};
+
 			var mock = new Mock<IPingAble>();
 			mock.Setup(m => m.PingMethod(It.IsAny<string>())).Returns(true);
-			mock.Setup(o => o.GetAllPingableDestinations()).Returns(new List<string>());
+			mock.Setup(o => o.GetAllPingableDestinations()).Returns(testList);
 
-			Run run = new Run(mock.Object);
+		    DependencyFactory.Container.RegisterInstance<IPingAble>(mock.Object);
 
-			var c = container.Resolve<Run>();
+			var abc = Run.Instanse.Test();
+			var emptyList = Run.Instanse.GetAll();
 
-			container.RegisterType<Run>();
-			container.RegisterInstance<Run>(run);		//Register the instance of run
-
-
-			//unity.RegisterType<Run>();
-			Run runner = container.Resolve<Run>();	//Gets the registrated instance of the class Run
-			
-			
-			
-			
-			
-			
-			
-			var mixedResult = runner.MixMethods();
-
-
-			Assert.AreEqual(mixedResult, true);
-
-
-			var abc = run.Test();
-			var emptyList = run.GetAll();
-
-			Assert.AreEqual(emptyList.Count, 0);
+			Assert.AreEqual(abc, true);
+            Assert.AreEqual(emptyList, testList);
 		}
 	}
 }

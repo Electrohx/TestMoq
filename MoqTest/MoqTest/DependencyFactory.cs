@@ -29,16 +29,7 @@ namespace MoqTest
 		static DependencyFactory()
 		{
 			IUnityContainer container = new UnityContainer();
-			container.RegisterType<PingClass>();
-			//try
-			//{
-			//	container.LoadConfiguration("MyContainer");
-			//}
-			//catch (Exception e)
-			//{
 
-			//	throw;
-			//}
 
 			var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
 			if (section != null)
