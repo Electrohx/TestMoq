@@ -11,9 +11,7 @@ namespace MoqTest
 	{
 		static void Main(string[] args)
 		{
-			//IUnityContainer myCont = new UnityContainer();
-			//myCont.RegisterType<PingClass>();
-			//myCont.RegisterInstance(new PingClass());
+		    DependencyFactory.Container.RegisterType<IPingAble, PingClass>();
 
 			var run = Run.Instanse.Test();
 			var ListWithPingableDestinations = Run.Instanse.GetAll();
